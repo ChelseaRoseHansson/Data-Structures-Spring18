@@ -129,18 +129,36 @@ void LinkedList::insertNode(int pos, int id, string firstName, string lastName, 
 	}
 }
 
-int LinkedList::findNode(string firstName)
+bool LinkedList::findNodeByFirstName(string firstName)
 {
 	Node *temp = head;
 	bool found = false;
-	int i = 0;
+	int i = 0, row = 11;
+
+	gotoxy(51, 9);
+	cout << " Searched by First Name\n";
+	gotoxy(51, 10);
+	cout << " ====================================\n";
 
 	for (int i = 1; i <= length; i++)
 	{
 		if (temp->firstName == firstName)
 		{
+			gotoxy(51, row);
+			cout << " ID: " << temp->id << endl;
+			gotoxy(51, row + 1);
+			cout << " First Name: " << temp->firstName << endl;
+			gotoxy(51, row + 2);
+			cout << " Last Name: " << temp->lastName << endl;
+			gotoxy(51, row + 3);
+			cout << " Phone: " << temp->phone << endl;
+			gotoxy(51, row + 4);
+			cout << " Email: " << temp->email << endl;
+			gotoxy(51, row + 5);
+			cout << " ====================================\n";
+			row += 6;
+			temp = temp->next;
 			found = true;
-			break;
 		}
 		else
 		{
@@ -148,15 +166,127 @@ int LinkedList::findNode(string firstName)
 		}
 	}
 
-	if (found)
+	return found;
+}
+
+bool LinkedList::findNodeByLastName(string lastName)
+{
+	Node *temp = head;
+	bool found = false;
+	int i = 0, row = 11;
+
+	gotoxy(51, 9);
+	cout << " Searched by First Name\n";
+	gotoxy(51, 10);
+	cout << " ====================================\n";
+
+	for (int i = 1; i <= length; i++)
 	{
-		gotoxy(10, 18);
-		cout << setw(4) << "ID" << setw(20) << "First Name" << setw(20) << "Last Name" << setw(16) << "Phone" << setw(25) << "Email" << endl;
-		gotoxy(10, 19);
-		cout << setw(4) << temp->id << setw(20) << temp->firstName << setw(20) << temp->lastName << setw(16) << temp->phone << setw(50) << temp->email;
-		return i;
+		if (temp->lastName == lastName)
+		{
+			gotoxy(51, row);
+			cout << " ID: " << temp->id << endl;
+			gotoxy(51, row + 1);
+			cout << " First Name: " << temp->firstName << endl;
+			gotoxy(51, row + 2);
+			cout << " Last Name: " << temp->lastName << endl;
+			gotoxy(51, row + 3);
+			cout << " Phone: " << temp->phone << endl;
+			gotoxy(51, row + 4);
+			cout << " Email: " << temp->email << endl;
+			gotoxy(51, row + 5);
+			cout << " ====================================\n";
+			row += 6;
+			temp = temp->next;
+			found = true;
+		}
+		else
+		{
+			temp = temp->next;
+		}
 	}
-	return 0;
+
+	return found;
+}
+
+bool LinkedList::findNodeByPhone(string phone)
+{
+	Node *temp = head;
+	bool found = false;
+	int i = 0, row = 11;
+
+	gotoxy(51, 9);
+	cout << " Searched by First Name\n";
+	gotoxy(51, 10);
+	cout << " ====================================\n";
+
+	for (int i = 1; i <= length; i++)
+	{
+		if (temp->phone == phone)
+		{
+			gotoxy(51, row);
+			cout << " ID: " << temp->id << endl;
+			gotoxy(51, row + 1);
+			cout << " First Name: " << temp->firstName << endl;
+			gotoxy(51, row + 2);
+			cout << " Last Name: " << temp->lastName << endl;
+			gotoxy(51, row + 3);
+			cout << " Phone: " << temp->phone << endl;
+			gotoxy(51, row + 4);
+			cout << " Email: " << temp->email << endl;
+			gotoxy(51, row + 5);
+			cout << " ====================================\n";
+			row += 6;
+			temp = temp->next;
+			found = true;
+		}
+		else
+		{
+			temp = temp->next;
+		}
+	}
+
+	return found;
+}
+
+bool LinkedList::findNodeByEmail(string email)
+{
+	Node *temp = head;
+	bool found = false;
+	int i = 0, row = 11;
+
+	gotoxy(51, 9);
+	cout << " Searched by First Name\n";
+	gotoxy(51, 10);
+	cout << " ====================================\n";
+
+	for (int i = 1; i <= length; i++)
+	{
+		if (temp->email == email)
+		{
+			gotoxy(51, row);
+			cout << " ID: " << temp->id << endl;
+			gotoxy(51, row + 1);
+			cout << " First Name: " << temp->firstName << endl;
+			gotoxy(51, row + 2);
+			cout << " Last Name: " << temp->lastName << endl;
+			gotoxy(51, row + 3);
+			cout << " Phone: " << temp->phone << endl;
+			gotoxy(51, row + 4);
+			cout << " Email: " << temp->email << endl;
+			gotoxy(51, row + 5);
+			cout << " ====================================\n";
+			row += 6;
+			temp = temp->next;
+			found = true;
+		}
+		else
+		{
+			temp = temp->next;
+		}
+	}
+
+	return found;
 }
 
 void LinkedList::deleteNode(string firstName, string lastName, string phone, string email)

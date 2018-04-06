@@ -19,6 +19,7 @@ bool writeDataToFile(int id, string firstName, string lastName, string phone, st
 		cout << "Unable to open file" << endl;
 		result = false;
 	}
+	fs.close();
 	return result;
 }
 
@@ -67,6 +68,7 @@ void getID(string fileName, int & id)
 		{
 			cout << "Unable to open file.\n";
 		}
+		file.close();
 	}
 	else
 	{
@@ -77,12 +79,34 @@ void getID(string fileName, int & id)
 void readData(string fileName)
 {
 	ifstream file(fileName); // declare file stream: 
-	string value;
-	while (file.good())
+	int id;
+	string temp, firstName, lastName, phone, email;
+
+	list.makeEmpty();
+
+	while (file)
 	{
-		getline(file, value, ','); // read a string until next comma
-		cout << value << " ";
+		string line;
+		if (!getline(file, line)) break;
+
+		stringstream ss(line);
+		if (ss.good())
+		{
+			getline(ss, temp, ','); // read a string until next comma
+			id = stoi(temp);
+
+			getline(ss, firstName, ',');
+
+			getline(ss, lastName, ',');
+
+			getline(ss, phone, ',');
+
+			getline(ss, email, ',');
+
+			list.insertEnd(id, firstName, lastName, phone, email);
+		}
 	}
+	file.close();
 }
 
 void displayData(string fileName)
@@ -120,14 +144,82 @@ void displayData(string fileName)
 
 			getline(ss, substr, ',');
 			email = substr;
-			list.insertBeg(id, firstName, lastName, phone, email);
+			list.insertEnd(id, firstName, lastName, phone, email);
 		}
 		list.displayList();
 		cout << endl;
 	}
+	inputFile.close();
 }
 
-void searchCustomer(string firstName)
+void searchCustomerByFirstName(string firstName, string fileName)
 {
-	list.findNode(firstName);
+	if (list.isEmpty())
+	{
+		readData(fileName);
+	}
+
+	if (list.findNodeByFirstName(firstName))
+	{
+
+	}
+	else
+	{
+		gotoxy(51, 18);
+		cout << "No existing customer" << endl;
+	}
+}
+
+void searchCustomerByLastName(string lastName, string fileName)
+{
+	if (list.isEmpty())
+	{
+		readData(fileName);
+	}
+
+	if (list.findNodeByLastName(lastName))
+	{
+
+	}
+	else
+	{
+		gotoxy(51, 18);
+		cout << "No existing customer" << endl;
+	}
+}
+
+void searchCustomerByPhone(string phone, string fileName)
+{
+	if (list.isEmpty())
+	{
+		readData(fileName);
+	}
+
+	if (list.findNodeByPhone(phone))
+	{
+
+	}
+	else
+	{
+		gotoxy(51, 18);
+		cout << "No existing customer" << endl;
+	}
+}
+
+void searchCustomerByEmail(string email, string fileName)
+{
+	if (list.isEmpty())
+	{
+		readData(fileName);
+	}
+
+	if (list.findNodeByEmail(email))
+	{
+
+	}
+	else
+	{
+		gotoxy(51, 18);
+		cout << "No existing customer" << endl;
+	}
 }

@@ -4,7 +4,7 @@
 #include "FileUtilities.h"
 #include <string>
 #include <cctype>
-
+#include <regex>
 using namespace std;
 
 
@@ -214,8 +214,10 @@ void userInput()
 void registrationMenu()
 {
 	string fileName = "customerData.csv";
-	string firstName, lastName, phone, email, name;
+	string firstName, lastName, phone, email;
 	char selection;
+	regex PHONE = regex("[[:digit:]]{3}-[[:digit:]]{3}-[[:digit:]]{4}");
+	regex EMAIL = regex("[[:alnum:]]+@[[:alpha:]]+\\.[[:alpha:]]+");
 
 	do
 	{
@@ -230,12 +232,18 @@ void registrationMenu()
 		gotoxy(50, 12);
 		cout << " 2. Display Customers\n";
 		gotoxy(50, 13);
-		cout << " 3. Search Customers\n";
+		cout << " 3. Search Customers By First Name\n";
 		gotoxy(50, 14);
-		cout << " 4. Exit\n";
+		cout << " 4. Search Customers By Last Name\n";
 		gotoxy(50, 15);
-		cout << " ====================================\n";
+		cout << " 5. Search Customers By Phone Number\n";
 		gotoxy(50, 16);
+		cout << " 6. Search Customers By Email\n";
+		gotoxy(50, 17);
+		cout << " x|X. Exit\n";
+		gotoxy(50, 18);
+		cout << " ====================================\n";
+		gotoxy(50, 19);
 		cout << " Enter your selection: ";
 		cin >> selection;
 		cout << endl;
@@ -246,23 +254,44 @@ void registrationMenu()
 		{
 			system("CLS");
 			int id;
-
+			
 			gotoxy(50, 9);
 			cout << "Input Data\n";
 			gotoxy(50, 10);
 			cout << "==========\n";
 			gotoxy(50, 11);
-			cout << "Please enter First Name:";
+			cout << "Please enter First Name: ";
 			cin >> firstName;
 			gotoxy(50, 12);
-			cout << "Please enter Last Name:";
+			cout << "Please enter Last Name: ";
 			cin >> lastName;
 			gotoxy(50, 13);
-			cout << "Please enter phone number:";
+			cout << "Please enter phone number: ";
 			cin >> phone;
-			gotoxy(50, 14);
-			cout << "Please enter email:";
+
+			while (!regex_match(phone, PHONE))
+			{
+				system("CLS");
+				gotoxy(50, 13);
+				cout << "Wrong Format (000-000-0000)" << endl;
+				gotoxy(50, 14);
+				cout << "Please enter phone number: ";
+				cin >> phone;
+			}
+
+			gotoxy(50, 15);
+			cout << "Please enter email: ";
 			cin >> email;
+
+			while (!regex_match(email, EMAIL))
+			{
+				system("CLS");
+				gotoxy(50, 15);
+				cout << "Wrong Format (xxx@xxxx.com)" << endl;
+				gotoxy(50, 16);
+				cout << "Please enter email: ";
+				cin >> phone;
+			}
 
 			getID(fileName, id);
 
@@ -270,12 +299,12 @@ void registrationMenu()
 
 			if (result == true)
 			{
-				gotoxy(50, 15);
+				gotoxy(50, 16);
 				cout << "Registrated successfully." << endl;
 			}
 			else
 			{
-				gotoxy(50, 15);
+				gotoxy(50, 16);
 				cout << "Unable to register" << endl;
 			}
 			system("pause");
@@ -285,27 +314,76 @@ void registrationMenu()
 		case '2':
 			system("CLS");
 			displayData(fileName);
+			gotoxy(51, 17);
 			system("pause");
 			break;
 
 		case '3':
-			gotoxy(51, 17);
-			cout << "Enter first name to search: ", cin >> name;
-			searchCustomer(name);
+			gotoxy(51, 20);
+			cout << "Enter first name to search: ", cin >> firstName;
+			system("CLS");
+			searchCustomerByFirstName(firstName, fileName);
 			system("pause");
-			return;
+			break;
+
+		case '4':
+			gotoxy(51, 20);
+			cout << "Enter last name to search: ", cin >> lastName;
+			system("CLS");
+			searchCustomerByLastName(lastName, fileName);
+			system("pause");
+			break;
+
+		case '5':
+			gotoxy(51, 20);
+			cout << "Enter phone number to search: ", cin >> phone;
+
+			while (!regex_match(phone, PHONE))
+			{
+				system("CLS");
+				gotoxy(50, 13);
+				cout << "Wrong Format (000-000-0000)" << endl;
+				gotoxy(50, 14);
+				cout << "Please enter phone number: ", cin >> phone;
+			}
+
+			system("CLS");
+			searchCustomerByPhone(phone, fileName);
+			system("pause");
+			break;
+
+		case '6':
+			gotoxy(51, 20);
+			cout << "Enter email to search: ", cin >> email;
+
+			while (!regex_match(email, EMAIL))
+			{
+				system("CLS");
+				gotoxy(50, 15);
+				cout << "Wrong Format (xxx@xxxx.com)" << endl;
+				gotoxy(50, 16);
+				cout << "Please enter email: ";
+				cin >> phone;
+			}
+
+			system("CLS");
+			searchCustomerByEmail(email, fileName);
+			system("pause");
+			break;
 
 		case 'X':
 		case 'x':
-			gotoxy(51, 17);
+			gotoxy(51, 20);
 			cout << "Goodbye.\n";
+			gotoxy(51, 21);
 			system("pause");
 			return;
 
 		default:
-			gotoxy(51, 16);
+			gotoxy(51, 20);
 			cout << selection << " is not a valid menu item.\n";
 			cout << endl;
+			gotoxy(51, 21);
 			system("pause");
 			break;
 		}
@@ -357,17 +435,11 @@ void mainMenu()
 			androidProgramming();
 			break;
 
-		case '4':
-			iosProgramming();
-			break;
-
-		case '5':
-			userInput();
-			break;
-
-		case '6':
+		case 'X':
+		case 'x':
 			gotoxy(51, 19);
 			cout << "Goodbye.\n";
+			gotoxy(51, 20);
 			system("pause");
 			return;
 
@@ -375,10 +447,10 @@ void mainMenu()
 			gotoxy(51, 19);
 			cout << selection << " is not a valid menu item.\n";
 			cout << endl;
+			gotoxy(51, 20);
 			system("pause");
 		}
 
-	} while (selection != 6);
-
+	} while (selection != 'x' || selection != 'X');
 
 }

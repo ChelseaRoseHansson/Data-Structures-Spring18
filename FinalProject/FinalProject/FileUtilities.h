@@ -14,4 +14,7 @@ inline bool fileExists(const string& fileName);
 void getID(string fileName, int & id);
 void readData(string fileName);
 void displayData(string fileName);
-void searchCustomer(string firstName);
+void searchCustomerByFirstName(string firstName, string fileName);
+void searchCustomerByLastName(string lastName, string fileName);
+void searchCustomerByPhone(string phone, string fileName);
+void searchCustomerByEmail(string email, string fileName);

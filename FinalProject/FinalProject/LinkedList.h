@@ -18,7 +18,10 @@ public:
 	void insertBeg(int id, string firstName, string lastName, string phone, string email);
 	void insertEnd(int id, string firstName, string lastName, string phone, string email);
 	void insertNode(int pos, int id, string firstName, string lastName, string phone, string email);
-	int findNode(string firstName);
+	bool findNodeByFirstName(string firstName);
+	bool findNodeByLastName(string lastName);
+	bool findNodeByPhone(string phone);
+	bool findNodeByEmail(string email);
 	void deleteNode(string firstName, string lastName, string phone, string email);
 	void deleteAtPosition(int pos);
 	int getLength() const;
