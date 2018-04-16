@@ -290,7 +290,7 @@ void registrationMenu()
 				cout << "Wrong Format (xxx@xxxx.com)" << endl;
 				gotoxy(50, 16);
 				cout << "Please enter email: ";
-				cin >> phone;
+				cin >> email;
 			}
 
 			getID(fileName, id);
@@ -299,14 +299,15 @@ void registrationMenu()
 
 			if (result == true)
 			{
-				gotoxy(50, 16);
+				gotoxy(50, 17);
 				cout << "Registrated successfully." << endl;
 			}
 			else
 			{
-				gotoxy(50, 16);
+				gotoxy(50, 17);
 				cout << "Unable to register" << endl;
 			}
+			gotoxy(50, 18);
 			system("pause");
 		}
 		break;
@@ -362,8 +363,7 @@ void registrationMenu()
 				gotoxy(50, 15);
 				cout << "Wrong Format (xxx@xxxx.com)" << endl;
 				gotoxy(50, 16);
-				cout << "Please enter email: ";
-				cin >> phone;
+				cout << "Please enter email: ", cin >> email;
 			}
 
 			system("CLS");

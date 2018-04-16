@@ -14,25 +14,13 @@ void splashScreen()
 
 	//http://www.kammerl.de/ascii/AsciiSignature.php
 	string art = "";
-	art += "::::    ::::  :::   :::\n";
-	art += "+:+:+: :+:+:+ :+:   :+:\n";
-	art += "+:+ +:+:+ +:+  +:+ +:+ \n";
-	art += "+#+  +:+  +#+   +#++:  \n";
-	art += "+#+       +#+    +#+   \n";
-	art += "#+#       #+#    #+#   \n";
-	art += "###       ###    ###   \n";
+	art += "            ___                                       _  _           ___    _             _       _                  \n";
+	art += "    o O O  / __|    _ _   ___    __     ___     _ _  | || |   o O O / __|  | |_   __ _   | |_    (_)    ___   _ _    \n";
+	art += "   o      | (_ |   | '_| / _ \\  / _|   / -_)   | '_|  \\_, |  o      \\__ \\  |  _| / _` |  |  _|   | |   / _ \\ | ' \\   \n";
+	art += "  TS__[O]  \\___|  _|_|_  \\___/  \\__|_  \\___|  _|_|_  _|__/  TS__[O] |___/  _\\__| \\__,_|  _\\__|  _|_|_  \\___/ |_||_|  \n";
+	art += " {======_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_| \"\"\"\"\"| \"\"\"\"|{======_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"| \n";
+	art += "./o--000\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-./o--000\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-' \n";
 	cout << art;
-
-	gotoxy(50, 9);
-	cout <<"    dMMMMb  dMMMMb  .aMMMb dMMMMMP dMMMMMP .aMMMb dMMMMMMP\n";
-	gotoxy(50, 10);
-	cout << "   dMP.dMP dMP.dMP dMP\"dMP    dMP dMP     dMP\"VMP   dMP   \n";
-	gotoxy(50, 11);
-	cout << "  dMMMMP\" dMMMMK\" dMP dMP    dMP dMMMP   dMP       dMP    \n";
-	gotoxy(50, 12);
-	cout << " dMP     dMP\"AMF dMP.aMPdK.dMP dMP     dMP.aMP   dMP     \n";
-	gotoxy(50, 13);
-	cout << "dMP     dMP dMP  VMMMP\" VMMMP\" dMMMMMP  VMMMP\"   dMP      \n";
 
 	cin.get();
 

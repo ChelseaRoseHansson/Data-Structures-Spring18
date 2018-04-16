@@ -146,9 +146,9 @@ void displayData(string fileName)
 			email = substr;
 			list.insertEnd(id, firstName, lastName, phone, email);
 		}
-		list.displayList();
 		cout << endl;
 	}
+	list.displayList();
 	inputFile.close();
 }
 
