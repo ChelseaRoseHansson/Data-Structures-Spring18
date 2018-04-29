@@ -142,7 +142,7 @@ bool LinkedList::findNodeByFirstName(string firstName)
 
 	for (int i = 1; i <= length; i++)
 	{
-		if (temp->firstName == firstName)
+		if (_stricmp(temp->firstName.c_str(), firstName.c_str()) == 0)
 		{
 			gotoxy(51, row);
 			cout << " ID: " << temp->id << endl;
@@ -182,7 +182,7 @@ bool LinkedList::findNodeByLastName(string lastName)
 
 	for (int i = 1; i <= length; i++)
 	{
-		if (temp->lastName == lastName)
+		if (_stricmp(temp->lastName.c_str(), lastName.c_str()) == 0)
 		{
 			gotoxy(51, row);
 			cout << " ID: " << temp->id << endl;
@@ -222,7 +222,7 @@ bool LinkedList::findNodeByPhone(string phone)
 
 	for (int i = 1; i <= length; i++)
 	{
-		if (temp->phone == phone)
+		if (_stricmp(temp->phone.c_str(), phone.c_str()) == 0)
 		{
 			gotoxy(51, row);
 			cout << " ID: " << temp->id << endl;
@@ -262,7 +262,7 @@ bool LinkedList::findNodeByEmail(string email)
 
 	for (int i = 1; i <= length; i++)
 	{
-		if (temp->email == email)
+		if (_stricmp(temp->email.c_str(), email.c_str()) == 0)
 		{
 			gotoxy(51, row);
 			cout << " ID: " << temp->id << endl;
