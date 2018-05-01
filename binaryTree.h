@@ -4,19 +4,19 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 using namespace std;
 
 
-//The three commented out functions need to be defined but the rest is there. Just figured I'd upload so you'd be able to
-//see how it works and such. 
+struct product {
+	int productID;
+	string name;
+	double price;
+};
+
 class binarySearchTree {
 
-	struct product {
-		int productID;
-		string name;
-		double price;
-	};
 
 	struct node {
 		product item;
@@ -131,9 +131,8 @@ class binarySearchTree {
 		inOrder(inOrderNode->right);	
 	}
 
-	//void initializeStruct(int newOrderID, string newName, double newPrice);
-	//void alterPrice(int newPrice);
-	//void alterName(string newName);
+
+
 
 
 public:
@@ -164,10 +163,3 @@ public:
 
 
 };
-
-
-
-
-
-
-#endif
