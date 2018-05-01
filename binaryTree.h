@@ -7,6 +7,9 @@
 
 using namespace std;
 
+
+//The three commented out functions need to be defined but the rest is there. Just figured I'd upload so you'd be able to
+//see how it works and such. 
 class binarySearchTree {
 
 	struct product {
