@@ -59,5 +59,14 @@
     <ClInclude Include="binarySearchTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="tranList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="transNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tranStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

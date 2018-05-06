@@ -1,6 +1,7 @@
 #ifndef H_binaryTree
 #define H_binaryTree
 
+#include "tranStack.h"
 
 #include <iostream>
 #include <string>
@@ -120,6 +121,7 @@ class binarySearchTree {
 		}
 	
 	}
+	
 	void inOrder(node* inOrderNode) {
 		if (inOrderNode == NULL) {
 			return;
@@ -151,7 +153,7 @@ public:
 	}
 	void display() {
 		inOrder(root);
-		cout << endl;	
+		cout << endl;
 	}
 	void search(int searchID) {
 		root = findByProductID(root, searchID);
@@ -177,12 +179,14 @@ public:
 	
 	}
 
-
-
-
-
-
-
+	void addProductToTran(int productID, tranStack* stack)
+	{
+		root = findByProductID(root, productID);
+		if (root != NULL)
+			stack->push(root->item.name, root->item.price);
+		else
+			cout << "Could not find product.\n";
+	}
 };
 
 

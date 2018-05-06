@@ -3,124 +3,14 @@
 #include "Menu.h"
 #include "FileUtilities.h"
 #include "binarySearchTree.h"
+#include "transNode.h"
+#include "tranList.h"
+#include "tranStack.h"
 #include <string>
 #include <cctype>
 #include <sstream>
 #include <regex>
 using namespace std;
-
-
-
-void computerProgrammingInCpp()
-{
-	system("Color 2B");
-	system("CLS");
-	gotoxy(50, 9);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 10);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 11);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 12);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 13);
-	cout << "*                Computer Programming In C++                  *" << endl;
-	gotoxy(50, 14);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 15);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 16);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 17);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 18);
-	system("PAUSE");
-
-}
-
-
-void javaProgramming()
-{
-	system("Color 2B");
-	system("CLS");
-	gotoxy(50, 9);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 10);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 11);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 12);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 13);
-	cout << "*                      Java Programming                       *" << endl;
-	gotoxy(50, 14);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 15);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 16);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 17);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 18);
-	system("PAUSE");
-
-}
-
-
-void androidProgramming()
-{
-	system("Color 2B");
-	system("CLS");
-	gotoxy(50, 9);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 10);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 11);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 12);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 13);
-	cout << "*                     Android Programming                     *" << endl;
-	gotoxy(50, 14);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 15);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 16);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 17);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 18);
-	system("PAUSE");
-
-}
-
-
-void iosProgramming()
-{
-	system("Color 2B");
-	system("CLS");
-	gotoxy(50, 9);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 10);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 11);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 12);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 13);
-	cout << "*                       IOS Programming                       *" << endl;
-	gotoxy(50, 14);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 15);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 16);
-	cout << "*                                                             *" << endl;
-	gotoxy(50, 17);
-	cout << "***************************************************************" << endl;
-	gotoxy(50, 18);
-	system("PAUSE");
-
-}
 
 int validate(string input, string checkType)
 {
@@ -487,6 +377,175 @@ void inventoryMenu() {
 	} while (selection != 'x' || selection != 'X');
 }
 
+void transactionMenu()
+{
+	int selection;
+	tranStack transaction;
+	binarySearchTree bst;
+	bst.populateTree("groceries.txt");
+	string input, fileName;
+	fstream file;
+	tranList transac;
+	string temp;
+
+	do {
+		system("Color 39");
+		system("CLS");
+		gotoxy(50, 9);
+		cout << " Transaction Menu\n";
+		gotoxy(50, 10);
+		cout << " ====================================\n";
+		gotoxy(50, 11);
+		cout << " 1. Start new transaction\n";
+		gotoxy(50, 12);
+		cout << " 2. Open existing transaction\n";
+		gotoxy(50, 13);
+		cout << " 3. Edit existing transaction\n";
+		gotoxy(50, 14);
+		cout << " 0. Exit\n";
+		gotoxy(50, 15);
+		cout << " ====================================\n";
+		gotoxy(50, 16);
+		cout << " Enter your selection: ";
+		cin >> selection;
+		cout << endl;
+
+		switch (selection)
+		{
+		case 1: // new transaction
+			do {
+				system("CLS");
+				transaction.printStack();
+				cout << "(1 = undo || 2 = print product list || (#) = add product by id || 3 = save and exit || 4 = exit)\n";
+				cout << " > Enter your selection: ";
+				cin >> selection;
+
+				switch (selection)
+				{
+				case 1:
+					transaction.undo();
+					break;
+				case 2:
+					system("cls");
+					cout << "Product list\n=================\n";
+					bst.display();
+					system("pause");
+					break;
+				case 3:
+					cin.ignore(INT_MAX, '\n'); cin.clear();
+					cout << "Enter file name: ";
+					getline(cin, fileName, '\n');
+					cin.clear();
+					transaction.saveTran(fileName);
+					selection = 4;
+					file.close();
+					transaction.~tranStack();
+				default:
+					if (selection != 4)
+						bst.addProductToTran(selection, &transaction);
+					system("pause");
+					break;
+				}
+			} while (selection != 4);
+			break;
+		case 2: // existing transaction
+			gotoxy(50, 17);
+			cout << " Enter file name: ";
+			cin.ignore(INT_MAX, '\n'); cin.clear();
+			getline(cin, fileName, '\n');
+			file.open(fileName + ".txt");
+			while (!file.eof())
+			{
+				getline(file, input);
+				getline(file, temp);
+				double inpDouble = stod(temp);
+				transac.add(input, inpDouble);
+			}
+			file.close();
+			do {
+				system("CLS");
+				transac.displayList();
+				transaction.printStack();
+				cout << "(1 = undo || 2 = print product list || (#) = add product by id || 3 = save and exit || 4 = exit)\n";
+				cout << " > Enter your selection: ";
+				cin >> selection;
+
+				switch (selection)
+				{
+				case 1:
+					transaction.undo();
+					break;
+				case 2:
+					system("cls");
+					cout << "Product list\n=================\n";
+					bst.display();
+					system("pause");
+					break;
+				case 3:
+					if (!transaction.isEmpty())
+					{
+						file.open(fileName + ".txt", fstream::app);
+						file << "\n";
+						file.close();
+						transaction.saveTran(fileName);
+					}
+					transac.~tranList();
+					transaction.~tranStack();
+					selection = 4;
+				default:
+					if (selection != 4)
+						bst.addProductToTran(selection, &transaction);
+					system("pause");
+					break;
+				}
+			} while (selection != 4);
+			break;
+		case 3: // edit transaction
+			gotoxy(50, 17);
+			cout << " Enter file name: ";
+			cin.ignore(INT_MAX, '\n'); cin.clear();
+			getline(cin, fileName, '\n');
+			file.open(fileName + ".txt");
+			while (!file.eof())
+			{
+				getline(file, input);
+				getline(file, temp);
+				double inpDouble = stod(temp);
+				transac.add(input, inpDouble);
+			}
+			file.close();
+			do {
+				system("CLS");
+				transac.displayListEdit();
+				cout << "Choose line to delete (0 to exit): ";
+				cin >> selection;
+				if (selection != 0)
+					transac.deleteAtPosition(selection);
+			} while (selection != 0);
+			selection = 4;
+			transac.saveToFile(fileName);
+			transac.~tranList();
+			break;
+		case 0:
+			gotoxy(51, 20);
+			cout << "Goodbye.\n";
+			gotoxy(51, 21);
+			system("pause");
+			transac.~tranList();
+			break;
+		default:
+			gotoxy(51, 20);
+			cout << selection << " is not a valid menu item.\n";
+			cout << endl;
+			gotoxy(51, 21);
+			system("pause");
+			break;
+			break;
+		} // switch
+	} while (selection != 0);
+
+}
+
 void mainMenu()
 {
 
@@ -506,7 +565,7 @@ void mainMenu()
 		gotoxy(50, 12);
 		cout << " 2. Inventory List\n";
 		gotoxy(50, 13);
-		cout << " 3. Welcome to Android Programming\n";
+		cout << " 3. Transactions\n";
 		gotoxy(50, 14);
 		cout << " x|X. Exit\n";
 		gotoxy(50, 17);
@@ -521,14 +580,12 @@ void mainMenu()
 		case '1':
 			registrationMenu();
 			break;
-
 		case '2':
 			inventoryMenu();
 			break;
 		case '3':
-			androidProgramming();
+			transactionMenu();
 			break;
-
 		case 'X':
 		case 'x':
 			gotoxy(51, 19);
