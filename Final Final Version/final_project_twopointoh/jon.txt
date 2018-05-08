@@ -1,0 +1,6 @@
+Oranges
+1.25
+banana
+0.69
+Apple
+0.75
